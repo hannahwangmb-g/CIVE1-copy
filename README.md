@@ -1,5 +1,6 @@
 # CIVE1
 
+Original code from: https://github.com/openai/openai-assistants-quickstart
 
 # OpenAI Assistants API Quickstart
 
