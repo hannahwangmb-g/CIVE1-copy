@@ -61,9 +61,33 @@ The main logic for chat will be found in the `Chat` component in `app/components
 
 ### Main Components
 
-- `app/components/chat.tsx` - handles chat rendering, [streaming](https://platform.openai.com/docs/assistants/overview?context=with-streaming), and [function call](https://platform.openai.com/docs/assistants/tools/function-calling/quickstart?context=streaming&lang=node.js) forwarding
-- `app/components/file-viewer.tsx` - handles uploading, fetching, and deleting files for [file search](https://platform.openai.com/docs/assistants/tools/file-search)
-
+- `app/components/chat.tsx`:  
+  handles chat rendering, [streaming](https://platform.openai.com/docs/assistants/overview?context=with-streaming), and [function call](https://platform.openai.com/docs/assistants/tools/function-calling/quickstart?context=streaming&lang=node.js) forwarding
+- `app/components/file-viewer.tsx`:    
+  handles uploading, fetching, and deleting files for [file search](https://platform.openai.com/docs/assistants/tools/file-search)
+- `app/components/chat.tsx`:   
+    Manages the chat interface, including rendering messages, handling streaming responses, and forwarding function calls.  
+- `app/components/file-viewer.tsx`:    
+    Handles file operations such as uploading, fetching, and deleting, facilitating file search capabilities within the assistant.  
+- `app/api/assistants`:   
+    Contains an endpoint for creating a new assistant, typically used during the application's startup.  
+- `app/api/assistants/threads`:   
+    Provides an endpoint for initiating new conversation threads with the assistant.  
+- `app/api/assistants/threads/[threadId]/messages`:   
+    Manages sending messages to the assistant within a specific thread.   
+- `app/api/assistants/threads/[threadId]/actions`:   
+    Allows informing the assistant about the outcomes of functions it has invoked.    
+- `app/api/assistants/files`:   
+    Offers endpoints to fetch, upload, and delete files associated with the assistant, supporting file search functionalities.    
+- `package.json`:   
+    Lists the project's dependencies, scripts, and metadata, essential for managing the Node.js environment.   
+- `next.config.mjs`:   
+    Contains configuration settings for Next.js, such as custom webpack configurations and environment variables.  
+- `tsconfig.json`:   
+    Defines TypeScript compiler options, ensuring consistent type checking and code compilation.  
+- `.gitignore`:   
+    Specifies files and directories that Git should ignore, preventing them from being tracked in version control.  
+    
 ### Endpoints
 
 - `api/assistants` - `POST`: create assistant (only used at startup)
