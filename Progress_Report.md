@@ -156,7 +156,7 @@ Development Plan:
 #### Plan for next week  
 1. Refine the web app interface, including the reference display.  
 2. Organize and expand the knowledge base.  
-3. Explore conversation history storage and determine a database solution.  
+3. Explore conversation history storage and determine a database solution. (Optional Function)  
 4. Ensure each new conversation starts a new thread.  
 	- (Note: Instruct users to create a new conversation when message history is not needed for reference to avoid reaching the daily token limit.)  
 
@@ -172,6 +172,7 @@ Development Plan:
 2. Add a conversation history sidebar.
 3. Add a footer, including displaying the number of tokens used for each message, and working status (retrieving document, etc.)
 4. Add a start page for users to enter their API key. (Users must be added as members of the CIVE1 project on the platform.)
+   - Alternatively, guide user to set their API key through code.
 
 
 #### Notes on Database (User Conversation History Storage)
@@ -201,5 +202,14 @@ SQLite: Free local storage.
 (The system instruction has a maximum length of 256,000 characters.)
 
 
+### Week6(Nov.25-29) Work log
+1. Explored the CPT_tool.
+2. Explored function calling. Current conclusion: it may be overly complex. Considering an alternative approach, such as automating the workflow with a Python program first, while leaving the possibility of AI model integration for future exploration.
 
+#### Plan for next week
+1. Convert spreadsheets into Python programs:
+	- CPT_footing.xlsx
+	- CPT_lcpc.xlsx
+2. Continue exploring function calling.
+3. Organize articles in Teams and integrate them into the knowledge base.
 
