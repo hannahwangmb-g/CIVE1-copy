@@ -213,3 +213,11 @@ SQLite: Free local storage.
 2. Continue exploring function calling.
 3. Organize articles in Teams and integrate them into the knowledge base.
 
+
+#### Nov.29 Meeting Note
+1. Overall description of our project(Slides by noon Dec.2nd)
+   - Functionalities
+   - Approach/Methodology
+2. Ollama
+3. ~92MB to 4MB Vector Data.
+4. Database for conversation history.
