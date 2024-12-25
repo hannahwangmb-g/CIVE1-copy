@@ -220,10 +220,11 @@ SQLite: Free local storage.
 - Paused.
 
 #### Plan for Next Week
-1. Keep working on function calling, with the cpt_footing excel.  
+1. Keep working on function calling, with the CPT_footing excel.  
 2. Implement conversation history retrieval.  
 3. Implement save memory to instruction.  
 
 ---
 
 ### **Week 10 (Dec. 23-27) Work Log**
+1. Complete the python script for using CPT_footing excel.
