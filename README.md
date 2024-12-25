@@ -220,8 +220,10 @@ SQLite: Free local storage.
 - Paused.
 
 #### Plan for Next Week
-1. Implement conversation history retrieval.  
-2. Implement save memory to instruction.  
+1. Keep working on function calling, with the cpt_footing excel.  
+2. Implement conversation history retrieval.  
+3. Implement save memory to instruction.  
+
 ---
 
 ### **Week 10 (Dec. 23-27) Work Log**
