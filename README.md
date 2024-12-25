@@ -210,7 +210,7 @@ SQLite: Free local storage.
 
 ---
 
-### **Week 8-9 **
+### **Week 8-9**  
 - Paused.
 
 #### Plan for Next Week
