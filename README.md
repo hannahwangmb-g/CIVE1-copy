@@ -207,3 +207,15 @@ SQLite: Free local storage.
 #### Plan for Next Week  
 - Pause work for two weeks due to final exams, as per the original schedule.  
 - Will continue expanding, refining, and finalizing the remaining parts of the project after the final exam period, with a focus on implementing database storage for conversation history.
+
+---
+
+### **Week 8-9 **
+- Paused.
+
+#### Plan for Next Week
+1. Implement conversation history retrieval.  
+2. Implement save memory to instruction.  
+---
+
+### **Week 10 (Dec. 23-27) Work Log**
