@@ -213,3 +213,15 @@ SQLite: Free local storage.
 #### Nov. 29 (Fri) Meeting Notes
 - Remember to decline the meeting invitation for next two weeks.
 - Keep working on function calling, with the cpt_footing excel.
+
+---
+
+### **Week 8-9**  
+- Paused.
+
+#### Plan for Next Week
+1. Implement conversation history retrieval.  
+2. Implement save memory to instruction.  
+---
+
+### **Week 10 (Dec. 23-27) Work Log**
