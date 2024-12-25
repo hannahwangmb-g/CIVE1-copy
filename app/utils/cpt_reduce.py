@@ -3,7 +3,15 @@ import pandas as pd
 import re
 import numpy as np
 
-file_paths = {'040C6.CPT': '/workspaces/CIVE1/cpt_based_tool/files/040C6.CPT'}
+# Specify the directory path containing CPT files
+cpt_directory = '/workspaces/CIVE1/cpt_based_tool/files'
+
+# Create a dictionary to store the paths of all .CPT files
+file_paths = {}
+for filename in os.listdir(cpt_directory):
+    if filename.endswith('.CPT'):  # Only process files with .CPT extension
+        file_paths[filename] = os.path.join(cpt_directory, filename)
+
 # Reading each file assuming they are in a fixed-width format 
 uploaded_data_frames = {}
 for name, path in file_paths.items():
@@ -111,12 +119,21 @@ for name, df in reduced_data_frames.items():
     Bq = Bq[valid_indices]
     Ic = Ic[valid_indices]
 
+    # Save the reduced data to a new Excel file
+    # Ensure the output directory exists
+    output_directory = "/workspaces/CIVE1/cpt_based_tool/gpt"
+    os.makedirs(output_directory, exist_ok=True)
 
-# Save the reduced data to a new Excel file
-output_reduced_excel_path = f"/workspaces/CIVE1/cpt_based_tool/gpt/gpt_reduced_data.xlsx"
-with pd.ExcelWriter(output_reduced_excel_path) as writer:
-    for sheet_name, processed_df in reduced_data_frames.items():
-        processed_df.to_excel(writer, sheet_name=sheet_name, index=False)
+    # Create a separate Excel file for each processed CPT data
+    for name, processed_df in reduced_data_frames.items():
+        # Extract the base name from the original file name (excluding the extension)
+        base_name = os.path.splitext(name)[0]
+        # Create the output file path
+        output_path = os.path.join(output_directory, f"reduced_{base_name}.xlsx")
+        
+        # Save to Excel
+        processed_df.to_excel(output_path, index=False)
+        print(f"Saved reduced data for {name} to {output_path}")
 
 # main
 print("Data reduction completed. The reduced data is saved to reduced_data.xlsx.")

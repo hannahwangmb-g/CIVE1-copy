@@ -202,8 +202,14 @@ SQLite: Free local storage.
 3. Enhanced the warning page with API key validation and user guidance.  
 4. Successfully developed function calling with local file storage:  
    - Initial attempt using OpenAI's file storage failed due to unsupported file purposes for `.CPT` and `.xlsx` formats.  
+     - Note on this: For future local LLM solution, we can have the support of different formats as needed.
    - Adopted local file storage as a solution, allowing the model to perform function calls by reading files from and storing files to local paths.  
 
 #### Plan for Next Week  
 - Pause work for two weeks due to final exams, as per the original schedule.  
 - Will continue expanding, refining, and finalizing the remaining parts of the project after the final exam period, with a focus on implementing database storage for conversation history.
+- Try to have a data upload box and download box so user don't have to set it manually.
+
+#### Nov. 29 (Fri) Meeting Notes
+- Remember to decline the meeting invitation for next two weeks.
+- Keep working on function calling, with the cpt_footing excel.
