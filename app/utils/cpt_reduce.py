@@ -4,7 +4,7 @@ import re
 import numpy as np
 
 # Specify the directory path containing CPT files
-cpt_directory = '/workspaces/CIVE1/cpt_based_tool/files'
+cpt_directory = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'cpt_based_tool', 'files')
 
 # Create a dictionary to store the paths of all .CPT files
 file_paths = {}
@@ -52,7 +52,7 @@ def reduce_cpt_data(df):
 reduced_data_frames = {name: reduce_cpt_data(df) for name, df in uploaded_data_frames.items()}
 
 # Load the Excel file containing CPT file names and gwl values
-gwl_file_path = "/workspaces/CIVE1/cpt_based_tool/files/gwl.xlsx"
+gwl_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'cpt_based_tool', 'files', 'gwl.xlsx')
 if not os.path.exists(gwl_file_path):
     raise FileNotFoundError("gwl.xlsx not found. Please ensure it is placed in files/ directory.")
 
@@ -121,7 +121,7 @@ for name, df in reduced_data_frames.items():
 
     # Save the reduced data to a new Excel file
     # Ensure the output directory exists
-    output_directory = "/workspaces/CIVE1/cpt_based_tool/gpt"
+    output_directory = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'cpt_based_tool', 'gpt')
     os.makedirs(output_directory, exist_ok=True)
 
     # Create a separate Excel file for each processed CPT data
