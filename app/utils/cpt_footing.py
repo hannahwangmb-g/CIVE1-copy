@@ -43,7 +43,7 @@ for name, path in file_paths.items():
                 sheet.cell(row=row_idx, column=col_idx).value = None
 
         # Save the updated workbook
-        output_path = os.path.join(output_directory, f'updated_{name}')
+        output_path = os.path.join(output_directory, f'footing_{name}')
         workbook.save(output_path)
 
     except Exception as e:

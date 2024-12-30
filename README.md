@@ -220,11 +220,24 @@ SQLite: Free local storage.
 - Paused.
 
 #### Plan for Next Week
-1. Keep working on function calling, with the CPT_footing excel.  
-2. Implement conversation history retrieval.  
-3. Implement save memory to instruction.  
+1. Continue working on function calling with the CPT_footing Excel file.  
+2. Improve file upload and output presentation for better user experience.   
 
 ---
 
 ### **Week 10 (Dec. 23-27) Work Log**
-1. Complete the python script for using CPT_footing excel.
+1. Finished the Python script for using the CPT_footing Excel file.
+2. Added file input and output manager widgets.
+3. Enabled file uploads from local PC to the input widget.
+4. Added deletion functionality for input and output widgets.
+
+#### Plan for Next Week
+1. Add the "open folder" feature for output files.
+2. Implement conversation history retrieval.
+3. Add a function to save memory as system instruction.
+4. Continue working on CPT_lcpc.xlsx.
+5. Add navigation for different pages:
+   - Regular file search
+   - CPT data processing
+
+---

@@ -6,6 +6,7 @@ import Chat from "./components/chat";
 import { cptReduce } from "./utils/cpt_reduce";
 import { cptFooting } from "./utils/cpt_footing";
 import FileViewer from "./components/file-viewer";
+import FileManager from "./components/file-manager";
 
 const FunctionCalling = () => {
   const [outputData, setOutputData] = useState("");
@@ -39,7 +40,7 @@ const FunctionCalling = () => {
     <main className={styles.main}>
       <div className={styles.container}>
         <div className={styles.column}>
-          <FileViewer />
+          <FileManager />
         </div>
         <div className={styles.chatContainer}>
           <div className={styles.chat}>
