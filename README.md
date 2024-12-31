@@ -232,12 +232,17 @@ SQLite: Free local storage.
 4. Added deletion functionality for input and output widgets.
 
 #### Plan for Next Week
-1. Add the "open folder" feature for output files.
+1. **Continue working on CPT_lcpc.xlsx.**
 2. Implement conversation history retrieval.
 3. Add a function to save memory as system instruction.
-4. Continue working on CPT_lcpc.xlsx.
+4. Add the "open folder" feature for output files.
 5. Add navigation for different pages:
    - Regular file search
    - CPT data processing
 
----
+#### Dec. 30 (Mon) Meeting Notes
+1. For footing calculation: When qc <= 0, adjust it to 1 * 10^-3 mpa. (To resolve the negative value issue)
+2. ASCE Technical Breakthrough:
+   - What is the breakthrough(focusing on automation process)
+   - One figure(can have sub-figures)
+   - Read the article about LLM, and articles under Technical Breakthrough for reference.

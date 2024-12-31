@@ -11,7 +11,7 @@ export async function DELETE(
 ) {
   try {
     const filename = params.filename;
-    // 尝试从输入和输出目录删除文件
+    // Delete the input and output files
     await Promise.all([
       fs.unlink(path.join(INPUT_PATH, filename)).catch(() => {}),
       fs.unlink(path.join(OUTPUT_PATH, filename)).catch(() => {})
