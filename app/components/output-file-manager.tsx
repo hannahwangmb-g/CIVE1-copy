@@ -82,6 +82,7 @@ const OutputFileManager = () => {
     } catch (err) {
       console.error("Error deleting file:", err);
     }
+    await fetchFiles();
   };
 
   return (

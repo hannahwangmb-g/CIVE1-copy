@@ -18,7 +18,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         {hasApiKey ? children : <Warnings />}
-        <img className="logo" src="/openai.svg" alt="OpenAI Logo" />
       </body>
     </html>
   );

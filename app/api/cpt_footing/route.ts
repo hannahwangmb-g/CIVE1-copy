@@ -1,12 +1,19 @@
 // app/api/reduce_cpt_data/route.ts
 import { NextResponse } from 'next/server';
 import { spawn } from 'child_process';
+import path from 'path';
+
+// 获取当前文件的目录路径
+const currentDir = __dirname;
+
+// 构建相对路径
+const scriptPath = path.join(currentDir, '../../utils/cpt_footing.py');
 
 export async function POST(request: Request) {
   const inputData = await request.json();
   
   return new Promise((resolve) => {
-    const pyProcess = spawn('python3', ['/workspaces/CIVE1/app/utils/cpt_footing.py']);
+    const pyProcess = spawn('python3', [scriptPath]);
     let outputData = '';
     let errorData = '';
 

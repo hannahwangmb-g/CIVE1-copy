@@ -1,9 +1,26 @@
-.chatContainer {
-  display: flex;
-  flex-direction: column-reverse;
-  height: 100%;
-  width: 100%;
+.container {
+  display: flex;            /* 启用 Flexbox 布局 */
+  flex-direction: row;      /* 子元素水平排列 */
+  height: 100vh;            /* 占满屏幕高度 */
+  width: 100%;              /* 占满屏幕宽度 */
 }
+
+.leftPanel {
+  margin-right: 20px;
+  width: 25%;               /* 占据 25% 的宽度 */
+  height: 95%;             /* 高度占满容器 */
+  background-color: #f7f7f7; /* 可选：浅灰色背景 */
+  border-radius: 16px;
+  padding: 10px;
+}
+
+.chatContainer {
+  flex-grow: 1;             /* 占据剩余空间 */
+  display: flex;            /* 内部依然使用 Flexbox 布局 */
+  flex-direction: column-reverse; /* 消息区域从下往上排列 */
+  height: 100%;             /* 高度占满容器 */
+}
+
 
 .inputForm {
   display: flex;
@@ -17,6 +34,7 @@
   flex-grow: 1;
   padding: 16px 24px;
   margin-right: 10px;
+  margin-left: 10px;
   border-radius: 60px;
   border: 2px solid transparent;
   font-size: 1em;
@@ -93,4 +111,14 @@
 .codeMessage span {
   color: #b8b8b8;
   margin-right: 8px;
+}
+
+.newChatBtn {
+  background-color: #000;        /* Black background */
+  color: white;                  /* White text */
+  padding: 8px 24px;             /* Button padding */
+  border-radius: 60px;           /* Rounded button shape */
+  text-align: center;            /* Center-align text */
+  display: inline-block;         /* Inline-block layout */
+  cursor: pointer;               /* Indicate it's clickable */
 }
