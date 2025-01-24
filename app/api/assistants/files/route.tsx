@@ -23,8 +23,9 @@ export async function POST(request) {
 // list files in assistant's vector store
 export async function GET() {
   const vectorStoreId = await getOrCreateVectorStore(); // get or create vector store
-  const fileList = await openai.beta.vectorStores.files.list(vectorStoreId);
-
+  const fileList = await openai.beta.vectorStores.files.list(vectorStoreId, {
+    limit: 20, // 设置返回文件的最大数量
+  });
   const filesArray = await Promise.all(
     fileList.data.map(async (file) => {
       const fileDetails = await openai.files.retrieve(file.id);

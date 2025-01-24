@@ -7,6 +7,7 @@ import Markdown from "react-markdown";
 // @ts-expect-error - no types for this yet
 import { AssistantStreamEvent } from "openai/resources/beta/assistants/assistants";
 import { RequiredActionFunctionToolCall } from "openai/resources/beta/threads/runs/runs";
+import ThreadList from "./thread-list";
 
 type MessageProps = {
   role: "user" | "assistant" | "code";
@@ -64,6 +65,7 @@ const Chat = ({
   const [messages, setMessages] = useState([]);
   const [inputDisabled, setInputDisabled] = useState(false);
   const [threadId, setThreadId] = useState("");
+  const threadListRef = useRef(null);
 
   // automatically scroll to bottom of chat
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -74,17 +76,40 @@ const Chat = ({
     scrollToBottom();
   }, [messages]);
 
+
   // create a new threadID when chat component created
   useEffect(() => {
     const createThread = async () => {
+      // 1. 先检查是否有历史线程
+      const response = await fetch('/api/assistants/threads/history');
+      const threads = await response.json();
+      
+      if (threads.length > 0) {
+        // 如果有历史线程，使用最新的一个
+        const latestThreadId = threads[0].id;
+        setThreadId(latestThreadId);
+        loadThread(latestThreadId); // 加载最新的历史消息
+        return;
+      }
+      
+      // 2. 如果没有历史线程，才创建新的
       const res = await fetch(`/api/assistants/threads`, {
         method: "POST",
       });
       const data = await res.json();
       setThreadId(data.threadId);
+  
+      const defaultName = new Date().toLocaleString();
+      await fetch(`/api/assistants/threads/history`, {
+        method: "POST",
+        body: JSON.stringify({ threadId: data.threadId, name: defaultName }),
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
     };
     createThread();
-  }, []);
+  }, []); // 依赖数组为空，只在组件挂载时执行一次
 
   const sendMessage = async (text) => {
     const response = await fetch(
@@ -248,7 +273,56 @@ const Chat = ({
     
   }
 
+  const loadThread = async (threadId: string) => {
+    try {
+      setThreadId(threadId);
+      // use new history endpoint to retrieve messages
+      const response = await fetch(`/api/assistants/threads/${threadId}/history`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      const messages = data.messages.map(msg => ({
+        role: msg.role,
+        text: msg.content[0]?.text?.value || ''
+      }))
+      .reverse();
+      setMessages(messages);
+    } catch (error) {
+      console.error('Failed loading history conversation:', error);
+    }
+  }
+  const createNewThread = async () => {
+    const res = await fetch(`/api/assistants/threads`, {
+      method: "POST",
+    });
+    const data = await res.json();
+    setThreadId(data.threadId);
+    setMessages([]); // empty message list
+
+    await fetch(`/api/assistants/threads/history`, {
+      method: "POST",
+      body: JSON.stringify({ threadId: data.threadId }),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+
+    // use ref to refresh
+    if (threadListRef.current) {
+      await threadListRef.current.fetchThreads();
+    }
+  };
+
   return (
+    <div className={styles.container}>
+      <div className={styles.leftPanel}>
+        <ThreadList 
+          ref={threadListRef}
+          currentThreadId={threadId}
+          onThreadSelect={loadThread}
+        />
+      </div>
     <div className={styles.chatContainer}>
       <div className={styles.messages}>
         {messages.map((msg, index) => (
@@ -260,6 +334,13 @@ const Chat = ({
         onSubmit={handleSubmit}
         className={`${styles.inputForm} ${styles.clearfix}`}
       >
+        <button
+          type="button"  // 注意这里是type="button"，避免触发form提交
+          onClick={createNewThread}
+          className={styles.newChatBtn}
+        >
+          New Chat
+        </button>
         <input
           type="text"
           className={styles.input}
@@ -275,6 +356,7 @@ const Chat = ({
           Send
         </button>
       </form>
+    </div>
     </div>
   );
 };

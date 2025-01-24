@@ -7,7 +7,7 @@ import path from 'path';
 const currentDir = __dirname;
 
 // 构建相对路径
-const scriptPath = path.join(currentDir, '../../utils/cpt_reduce.py');
+const scriptPath = path.join(currentDir, '../../utils/cpt_lcpc.py');
 
 export async function POST(request: Request) {
   const inputData = await request.json();
