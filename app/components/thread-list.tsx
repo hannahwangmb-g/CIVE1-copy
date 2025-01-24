@@ -59,8 +59,6 @@ const ThreadList = forwardRef(({ currentThreadId, onThreadSelect }: ThreadListPr
 
   useEffect(() => {
     fetchThreads();
-    const interval = setInterval(fetchThreads, 3000);
-    return () => clearInterval(interval);
   }, []);
 
   const deleteThread = async (threadId: string, e: React.MouseEvent) => {
@@ -79,6 +77,7 @@ const ThreadList = forwardRef(({ currentThreadId, onThreadSelect }: ThreadListPr
     } catch (error) {
       console.error('删除线程失败:', error);
     }
+    await fetchThreads();
   };
 
   const updateThreadName = async (threadId: string) => {
@@ -102,6 +101,7 @@ const ThreadList = forwardRef(({ currentThreadId, onThreadSelect }: ThreadListPr
     } catch (error) {
       console.error('更新线程名称失败:', error);
     }
+    await fetchThreads();
   };
 
   return (
