@@ -76,18 +76,36 @@ const Chat = ({
     scrollToBottom();
   }, [messages]);
 
+
   // create a new threadID when chat component created
   useEffect(() => {
     const createThread = async () => {
+      // 1. 先检查是否有历史线程
+      const response = await fetch('/api/assistants/threads/history');
+      const threads = await response.json();
+      
+      if (threads.length > 0) {
+        // 如果有历史线程，使用最新的一个
+        const latestThreadId = threads[0].id;
+        setThreadId(latestThreadId);
+        loadThread(latestThreadId); // 加载最新的历史消息
+        return;
+      }
+      
+      // 2. 如果没有历史线程，才创建新的
       const res = await fetch(`/api/assistants/threads`, {
         method: "POST",
       });
       const data = await res.json();
       setThreadId(data.threadId);
   
+      const defaultName = new Date().toLocaleString();
       await fetch(`/api/assistants/threads/history`, {
         method: "POST",
-        body: JSON.stringify({ threadId: data.threadId }),
+        body: JSON.stringify({ threadId: data.threadId, name: defaultName }),
+        headers: {
+          'Content-Type': 'application/json',
+        }
       });
     };
     createThread();

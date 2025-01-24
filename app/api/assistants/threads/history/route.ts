@@ -1,4 +1,3 @@
-// app/api/assistants/threads/history/route.ts
 import { openai } from "@/app/openai";
 import fs from 'fs';
 import path from 'path';
@@ -14,16 +13,29 @@ export async function GET() {
   return Response.json(threads);
 }
 
-// 保存新的 thread ID
+// 保存新的 thread ID 和名称
 export async function POST(request) {
-  const { threadId } = await request.json();
+  const { threadId, name } = await request.json();
   let threads = [];
   if(fs.existsSync(THREADS_FILE)) {
     threads = JSON.parse(fs.readFileSync(THREADS_FILE, 'utf8'));
   }
   // 避免重复添加
-  if (!threads.includes(threadId)) {
-    threads.push(threadId);
+  if (!threads.some(thread => thread.id === threadId)) {
+    threads.push({ id: threadId, name });
+    fs.writeFileSync(THREADS_FILE, JSON.stringify(threads));
+  }
+  return Response.json({ success: true });
+}
+
+// 更新线程名称
+export async function PUT(request) {
+  const { threadId, newName } = await request.json();
+  if(fs.existsSync(THREADS_FILE)) {
+    let threads = JSON.parse(fs.readFileSync(THREADS_FILE, 'utf8'));
+    threads = threads.map(thread => 
+      thread.id === threadId ? { ...thread, name: newName } : thread
+    );
     fs.writeFileSync(THREADS_FILE, JSON.stringify(threads));
   }
   return Response.json({ success: true });
@@ -39,7 +51,7 @@ export async function DELETE(request: Request) {
     // 从本地存储中删除
     if(fs.existsSync(THREADS_FILE)) {
       let threads = JSON.parse(fs.readFileSync(THREADS_FILE, 'utf8'));
-      threads = threads.filter(id => id !== threadId);
+      threads = threads.filter(thread => thread.id !== threadId);
       fs.writeFileSync(THREADS_FILE, JSON.stringify(threads));
     }
     
