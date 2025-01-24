@@ -39,6 +39,8 @@ const ThreadList = forwardRef(({ currentThreadId, onThreadSelect }: ThreadListPr
 
   useEffect(() => {
     fetchThreads();
+    const interval = setInterval(fetchThreads, 2000);
+    return() => clearInterval(interval);
   }, []);
 
   const deleteThread = async (threadId: string, e: React.MouseEvent) => {
