@@ -86,7 +86,7 @@ const Chat = ({
       
       if (threads.length > 0) {
         // 如果有历史线程，使用最新的一个
-        const latestThreadId = threads[0].id;
+        const latestThreadId = threads[threads.length - 1].id;
         setThreadId(latestThreadId);
         loadThread(latestThreadId); // 加载最新的历史消息
         return;

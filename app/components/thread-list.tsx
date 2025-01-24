@@ -59,6 +59,8 @@ const ThreadList = forwardRef(({ currentThreadId, onThreadSelect }: ThreadListPr
 
   useEffect(() => {
     fetchThreads();
+    const interval = setInterval(fetchThreads, 3000);
+    return () => clearInterval(interval);
   }, []);
 
   const deleteThread = async (threadId: string, e: React.MouseEvent) => {
@@ -72,13 +74,22 @@ const ThreadList = forwardRef(({ currentThreadId, onThreadSelect }: ThreadListPr
         },
       });
       if (response.ok) {
-        setThreads((prevThreads) => prevThreads.filter((thread) => thread.id !== threadId));
+        setThreads((prevThreads) => {
+          const updatedThreads = prevThreads.filter((thread) => thread.id !== threadId);
+          if (threadId === currentThreadId && updatedThreads.length > 0) {
+            // 如果删除的是当前对话的线程，自动选择一个新的线程
+            const newCurrentThreadId = updatedThreads[0].id;
+            onThreadSelect(newCurrentThreadId);
+          }
+          return updatedThreads;
+        });
       }
     } catch (error) {
       console.error('删除线程失败:', error);
     }
     await fetchThreads();
   };
+
 
   const updateThreadName = async (threadId: string) => {
     try {
@@ -101,7 +112,6 @@ const ThreadList = forwardRef(({ currentThreadId, onThreadSelect }: ThreadListPr
     } catch (error) {
       console.error('更新线程名称失败:', error);
     }
-    await fetchThreads();
   };
 
   return (
